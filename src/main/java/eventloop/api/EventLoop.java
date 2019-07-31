@@ -6,25 +6,41 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import java.util.function.BiConsumer;
 
+/**
+ * Basic definition of the event loop.
+ */
 public interface EventLoop {
 
     /**
-     * Submits a task to the the underlying pool of threads for asynchronous execution.
-     * When the task is done the callback will be invoked either with the result or with
-     * the error from the task execution or the task scheduling if any.
+     * Submits a task for asynchronous execution and then invokes the callback with the result from that task,
+     * in the loop thread.
      *
-     * @param task     the task which needs to e executed asynchronously
-     * @param callback the callback which needs to be invoked with the result of the task execution
+     * @param task     the task which needs to be executed asynchronously
+     * @param callback the function which will be executed in the loop thread
      * @param <T>      the type of the result which the task returns
-     * @return a optional which has to be empty if an error has occurred when the task is submitted for execution
-     * or containing a future which can be used to cancel the task.
+     * @return an {@link Optional} which contains {@link Future} to cancel the task or {@link Optional#empty()}
+     * if the task submission has failed
      */
     <T> Optional<Future> submit(Callable<T> task, BiConsumer<T, Exception> callback);
 
-    void loop();
+    /**
+     * Starts the processing of the finished asynchronous tasks.
+     */
+    void startLoop();
 
-    void breakLoop();
+    /**
+     * Sets a threshold for the amount of time which the loop thread needs to complete one cycle.
+     * If the amount if time is greater than the threshold value, the implementations must warn
+     * that some operation takes too much time in the loop thread.
+     *
+     * @param threshold the time in which the loop thread must make one execution of the event loop
+     */
+    void setLoopThreshold(long threshold);
 
-    List<Runnable> breakLoopNow();
-
+    /**
+     * Causes the loop thread to exit and shuts down the worker threads.
+     *
+     * @return the tasks which were waiting for execution;
+     */
+    List<Runnable> breakLoop();
 }
