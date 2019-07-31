@@ -8,11 +8,11 @@ import java.util.concurrent.*;
 import java.util.function.BiConsumer;
 
 @Slf4j
-public class TimerEventLoopImplImpl extends SimpleEventLoopImpl implements TimerEventLoop {
+public class TimerEventLoopImpl extends SimpleEventLoopImpl implements TimerEventLoop {
 
     private final ScheduledExecutorService taskExecutor;
 
-    public TimerEventLoopImplImpl(ScheduledExecutorService taskExecutor, BlockingQueue<TaskResult> finishedTasks) {
+    public TimerEventLoopImpl(ScheduledExecutorService taskExecutor, BlockingQueue<TaskResult> finishedTasks) {
         super(taskExecutor, finishedTasks);
         this.taskExecutor = taskExecutor;
 

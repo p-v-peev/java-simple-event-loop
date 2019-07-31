@@ -1,7 +1,7 @@
 package eventloop.api;
 
 import eventloop.impl.SimpleEventLoopImpl;
-import eventloop.impl.TimerEventLoopImplImpl;
+import eventloop.impl.TimerEventLoopImpl;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -20,6 +20,6 @@ public class EvenLoops {
 
     public static TimerEventLoop newTimerLinkedEventLoop() {
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors() + 1);
-        return new TimerEventLoopImplImpl(executor, new LinkedBlockingQueue<>());
+        return new TimerEventLoopImpl(executor, new LinkedBlockingQueue<>());
     }
 }
