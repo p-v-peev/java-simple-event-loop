@@ -1,2 +1,5 @@
 # java-simple-event-loop
-Simple event loop implementation in java, where you can execute tasks in asynchronous way and the result will be available in the event loop thread.
+Simple event loop implementation in java, which allows asynchronous execution of tasks and synchronous processing of the result from their execution.
+
+Examples:
+
