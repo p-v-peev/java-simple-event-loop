@@ -9,11 +9,11 @@ import java.util.function.BiConsumer;
 @ToString
 @AllArgsConstructor
 @EqualsAndHashCode
-public class BiConsumerTaskResult implements TaskResult {
+public class BiConsumerTaskResult<T> implements TaskResult {
 
-    private final Object result;
+    private final T result;
     private final Exception exception;
-    private final BiConsumer<Object, Exception> callback;
+    private final BiConsumer<T, Exception> callback;
 
     @Override
     public void processResult() {

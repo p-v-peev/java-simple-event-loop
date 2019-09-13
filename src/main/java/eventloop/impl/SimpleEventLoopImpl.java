@@ -27,9 +27,9 @@ public class SimpleEventLoopImpl implements EventLoop {
                 TaskResult result;
                 try {
                     T taskResult = task.call();
-                    result = new BiConsumerTaskResult(taskResult, null, (BiConsumer<Object, Exception>) callback);
+                    result = new BiConsumerTaskResult<>(taskResult, null, callback);
                 } catch (Exception e) {
-                    result = new BiConsumerTaskResult(null, e, (BiConsumer<Object, Exception>) callback);
+                    result = new BiConsumerTaskResult<>(null, e, callback);
                 }
                 try {
                     finishedTasks.put(result);

@@ -19,7 +19,7 @@ public class BiConsumerTaskResultTest {
             callbackArguments[1] = error;
         };
 
-        BiConsumerTaskResult taskResult = new BiConsumerTaskResult(null, e, callback);
+        BiConsumerTaskResult taskResult = new BiConsumerTaskResult<>(null, e, callback);
         taskResult.processResult();
 
         assertNull("The task result is not null, but should be", callbackArguments[0]);
